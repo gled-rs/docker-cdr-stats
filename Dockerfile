@@ -2,7 +2,9 @@ FROM debian:jessie
 MAINTAINER Tristan Mahe <gled@remote-shell.net>
 
 RUN apt-get update
-RUN apt-get install -y lsb-release wget paxctl git
+RUN apt-get install -y lsb-release wget paxctl git sysvinit-core sysvinit-utils
+RUN cp /usr/share/sysvinit/inittab /etc/inittab
+RUN apt-get remove -y --purge --auto-remove systemd
 RUN cd /usr/src/
 ADD install-cdr-stats.sh /usr/src/install-cdr-stats.sh
 ADD cdr-stats-functions.sh /usr/src/cdr-stats-functions.sh
